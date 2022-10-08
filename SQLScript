@@ -3,10 +3,6 @@ use Northwind;
 Begin
 --Create Roles
 
- Create role SalesRole;
- Create role HRRole;
- Create role CEORole;
-
 --Modify access for those roles/groups.
 
 Grant select on Northwind.dbo.Orders to SalesRole;
@@ -24,16 +20,17 @@ Create LOGIN [User_CEO] WITH PASSWORD = 'Test123!'
 Create login [User_HR] with password = 'Test123!'
 create login [User_Sales] with password = 'Test123!'
 
+
 Create user [User_CEO] for login [User_CEO]
 Create user [User_HR] for login [User_HR]
 Create user [User_Sales] for login [User_Sales]
 
-Create user [User_CEO] for Login [User_CEO] 
-EXEC sp_addrolemember N'CEORole', N'User_CEO'
-Create user [User_HR] for Login [User_HR] 
-EXEC sp_addrolemember N'HRRole', N'User_HR'
-Create user [User_Sales] for Login [User_Sales] 
-EXEC sp_addrolemember N'SalesRole', N'User_Sales'
+Alter LOGIN User_CEO WITH PASSWORD = 'Test123!' ;
+Alter LOGIN User_HR WITH PASSWORD = 'Test123!' ;
+Alter LOGIN User_Sales WITH PASSWORD = 'Test123!';
 
+ALTER ROLE SalesRole ADD MEMBER User_Sales;
+ALTER ROLE HRRole ADD MEMBER User_HR;
+ALTER ROLE CEORole ADD MEMBER User_CEO; 
 END
 GO
