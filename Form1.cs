@@ -50,7 +50,13 @@ namespace IT481_Unit3
                 MessageBox.Show("Password length must be 6 characters or more");
             }
 
-            else if (!regexPassword.IsMatch(password))
+            else if (!regexUser.IsMatch(user))
+            {
+                isValid = false;
+                MessageBox.Show("User contains invalid characters: Alphanumeric Values Only!");
+            }
+
+            else if (!password.Any(ch => !Char.IsLetterOrDigit(ch)))
             {
                 isValid = false;
                 MessageBox.Show("Password must contain at least one special character");
